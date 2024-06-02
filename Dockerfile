@@ -1,8 +1,7 @@
-FROM continuumio/miniconda3
+FROM python:3.11-slim-buster
 WORKDIR /app
-COPY ./conda.yaml ./
-RUN conda env create -f conda.yaml
+COPY ./requirements.txt .
+RUN pip install -r requirements.txt
 COPY app app
 COPY data data
-SHELL ["conda", "run", "-n", "streamlit-eddie-dashboard", "/bin/bash", "-c"]
-CMD ["conda", "run", "-n", "streamlit-eddie-dashboard", "python", "-m", "streamlit", "run", "app/main.py", "--server.port", "8000", "--server.address", "0.0.0.0"]
+CMD ["python", "-m", "streamlit", "run", "app/main.py", "--server.port", "8000", "--server.address", "0.0.0.0"]
