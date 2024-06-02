@@ -1,0 +1,1 @@
+docker build -t eddie-dash-app ./ && docker run -p 8000:8000 eddie-dash-app:latest
